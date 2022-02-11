@@ -1,0 +1,65 @@
+
+Graham = False # whether to use self-build Graham process
+
+num_classes = 2 # 1 for regression; 2 for binary classification ; 5 for multi(5-)class classification
+
+batch_size = 30 # batch size
+
+Trainer.N_epochs = 1000
+Trainer.num_classes=%num_classes
+Trainer.lr = 2e-4 # learning rate
+Trainer.Ckpts = True # whether to record checkpoint
+Trainer.Wandb = True # upload data to the Wandb or not
+Trainer.Wandb_Foto = True # upload the recorded pictures to the Wandb or not, which can save the disk capacity if closed
+Trainer.Profiler = False
+# whether to record the profiler. Highly recommended to be closed to save RAM especially for training on Kaggle dataset
+
+ckpt_fn="run_best_vision_transformer_16_5c"
+# Specify which checkpoint file in the experiments will be evaluated
+
+gen_run_folder.previous_ckpt_fn = %ckpt_fn
+gen_run_folder.Graham = %Graham
+
+ckpt_fns=['run_best_EfficientNetB2' ,'run_best_vision_transformer_16','run_best_ResNet50','run_best_DenseNet169','run_best_ResNet34']
+# Specify which checkpoint files will be used in ensemble learning.
+# if it's not set to be a list but one string, the ensemble learning will be done on a k_fold experiment record like following:
+# ckpt_fns='run_2021.12.22_T_12-33-04ResNet18_10-Fold'
+
+load_file_names.num_sample = 1000
+# size of training set after resampling. Each class will be num_sample/num_classes
+
+Visualisation.image_id = "IDRiD_054.jpg"
+# choose which picture will be used to show the deep visualisation
+
+fold_number=5
+# choose how many folds will be set on the raw dataset
+# in normal train process it means 20% of the raw dataset will be split out as validation dataset
+
+Stacking.ckpt_fns=%ckpt_fns
+Voting.ckpt_fns=%ckpt_fns
+
+choose_model.ckpt_fn= %ckpt_fn
+choose_model.num_classes=%num_classes
+choose_model.batch_size = %batch_size
+
+load_file_names.num_classes=%num_classes
+load_file_names.Graham = %Graham
+load_file_names.ckpt_fn = %ckpt_fn
+
+build_dataset.batch_size = %batch_size
+build_dataset_k.batch_size = %batch_size
+build_dataset.Graham = %Graham
+
+Visualisation.Graham = %Graham
+
+StackingModel.num_classes=%num_classes
+Voting.num_classes=%num_classes
+
+load_file_names.fold_number=%fold_number
+k_fold_Training.fold_number=%fold_number
+gen_run_folder.fold_number=%fold_number
+
+
+
+
+

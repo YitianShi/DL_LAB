@@ -1,0 +1,52 @@
+
+Graham = False
+num_classes = 5  # 1 for regression; 2 for binary classification ; 5 for multi(5-)class classification
+
+batch_size = 150
+Trainer.N_epochs = 100
+Trainer.num_classes=%num_classes
+Trainer.lr = 2e-4
+
+ckpt_fn="run_best_MobilenetV2"
+gen_run_folder.previous_ckpt_fn = %ckpt_fn
+gen_run_folder.Graham = %Graham
+
+
+Voting.ckpt_fns=['run_best_InceptionResnetV2'\
+                        ,'run_best_MobilenetV2'\
+                        ,'run_best_ResNet50'\
+                        ,'run_best_DenseNet121','run_best_InceptionV3']
+
+choose_model.ckpt_fn= %ckpt_fn
+choose_model.num_classes=%num_classes
+choose_model.batch_size = %batch_size
+load_file_names.ckpt_fn = %ckpt_fn
+
+load_file_names.num_sample = 1000
+load_file_names.num_classes=%num_classes
+load_file_names.Graham = %Graham
+
+build_dataset.batch_size = %batch_size
+build_dataset_k.batch_size = %batch_size
+build_dataset.Graham = %Graham
+
+Visualisation.image_id = "IDRiD_054.jpg"
+Visualisation.Graham = %Graham
+
+StackingModel.num_classes=%num_classes
+Voting.num_classes=%num_classes
+
+Trainer.Wandb=True
+Trainer.Wandb_Foto= False
+
+fold_number=10
+load_file_names.fold_number=%fold_number
+k_fold_Training.fold_number=%fold_number
+gen_run_folder.fold_number=%fold_number
+
+
+
+
+
+
+

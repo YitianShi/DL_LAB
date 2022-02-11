@@ -1,0 +1,40 @@
+SENSOR_CHANNELS = 6
+
+SELECTED_CLASSES = [0,1,1,1,1,1,1,1,1,1,1,1,1]  #[0,1,1,1,1,1,1,1,1,1,1,1,1] -> remove class '0'(0: no dominant Activity assigned)
+#SELECTED_CLASSES = [0,1,1,1,1,1,1,0,0,0,0,0,0]  #no transitions
+N_classes = 12
+
+N_EPOCHS = 1000
+LEARNING_RATE = 0.01
+BUFFER_SIZE = 200
+BATCH_SIZE = 20
+
+ckpt_fn=''
+#-----------------------------------------------------------#
+#-----------------------------------------------------------#
+
+#--------------------
+gen_run_folder.previous_ckpt_fn = %ckpt_fn
+gen_run_folder.selected_classes = %SELECTED_CLASSES
+
+chooseModel.ckpt_fn= %ckpt_fn
+#--------------------
+
+#---data_handle.py, tfr.py---
+bytestring_to_sensor_values.N_classes = %N_classes
+bytestring_to_sensor_values.sensor_channels = %SENSOR_CHANNELS
+
+map_fn.N_classes = %N_classes
+
+hapt_data.import_data_from_raw_files.SELECTED_CLASSES = %SELECTED_CLASSES
+
+#---train.py---
+train.training.l_rate = %LEARNING_RATE
+train.training.N_epochs = %N_EPOCHS
+train.training.num_classes = %N_classes
+
+
+#---hyperparameter---
+wandb_hyper_optimization.start_Hyper.num_classes = %N_classes
+wandb_hyper_optimization.start_Hyper.sensor_channels = %SENSOR_CHANNELS
+wandb_hyper_optimization.start_Hyper.batch_size = %BATCH_SIZE

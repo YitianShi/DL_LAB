@@ -1,0 +1,69 @@
+#CONSTANTS Settings
+#Data
+WINDOW_SIZE = 500
+WINDOW_SHIFT_RATIO = 0.5    #shifts= WINDOW_SHIFT_RATIO*WINDOW_SIZE
+LABELING_THRESHOLD = 0.5
+DROPOUT_RATE = 0.1
+LEARNING_RATE = 0.0005
+LSTM_UNITS = (10, 10)
+
+
+SELECTED_CLASSES = [0,1,1,1,1,1,1,1,1]  #[0,1,1,1,1,1,1,1,1,1,1,1,1] -> remove class '0'(0: no dominant Activity assigned)
+#SELECTED_CLASSES = [0,1,1,1,1,1,1,0,0,0,0,0,0]  #no transitions
+N_classes = 8
+
+SENSOR_CHANNELS = 6     #6-fold value depending on following sensor selection
+# !forearm sensor is MISSING in 2 Files: train5_climbingup & train_2_climbingup!
+#SELECTED_SENSORS = ["chest", "forearm", "head". "shin", "thigh", "upperarm", "waist"]
+SELECTED_SENSORS = ["waist"]
+
+
+
+
+N_EPOCHS = 1000
+BUFFER_SIZE = 200
+BATCH_SIZE = 30
+
+input_shape = (%WINDOW_SIZE, %SENSOR_CHANNELS)
+
+ckpt_fn='run_shin_Stacked_RNN'
+
+
+#----------------------------------------------------
+train.training.l_rate = %LEARNING_RATE
+train.training.N_epochs = %N_EPOCHS
+train.training.num_classes = %N_classes
+
+gen_run_folder.previous_ckpt_fn = %ckpt_fn
+gen_run_folder.window_shift_ratio = %WINDOW_SHIFT_RATIO
+gen_run_folder.window_size = %WINDOW_SIZE
+gen_run_folder.labeling_threshold = %LABELING_THRESHOLD
+gen_run_folder.selected_classes = %SELECTED_CLASSES
+
+chooseModel.ckpt_fn= %ckpt_fn
+chooseModel.num_classes=%N_classes
+chooseModel.input_shape=%input_shape
+chooseModel.batch_size = %BATCH_SIZE
+chooseModel.units = %LSTM_UNITS
+chooseModel.dropout_rate = %DROPOUT_RATE
+
+
+#---data_handling----
+bytestring_to_sensor_values.window_size = %WINDOW_SIZE
+bytestring_to_sensor_values.N_classes = %N_classes
+bytestring_to_sensor_values.sensor_channels = %SENSOR_CHANNELS
+
+#fmap_fn.WINDOW_SIZE = %WINDOW_SIZE
+map_fn.N_classes = %N_classes
+
+read_dataset_and_rearrange.window_size = %WINDOW_SIZE
+
+#--------------------
+shuffle_batch_prefetch_dataset.buffer_size = %BUFFER_SIZE
+shuffle_batch_prefetch_dataset.batch_size = %BATCH_SIZE
+
+har_data.import_data_from_raw_files.window_size = %WINDOW_SIZE
+har_data.import_data_from_raw_files.window_shift_ratio = %WINDOW_SHIFT_RATIO
+har_data.import_data_from_raw_files.SELECTED_CLASSES = %SELECTED_CLASSES
+
+

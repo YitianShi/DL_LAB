@@ -1,0 +1,19 @@
+
+Class 0 against all:
+ sensitivity: 91.91%, specificity: 92.54%, precision: 43.86%, accuracy: 92.50%, balanced_accuracy: 92.22%, F1-score:59.38%
+Class 1 against all:
+ sensitivity: 97.25%, specificity: 96.46%, precision: 74.39%, accuracy: 96.54%, balanced_accuracy: 96.85%, F1-score:84.29%
+Class 2 against all:
+ sensitivity: 73.26%, specificity: 95.25%, precision: 66.32%, accuracy: 92.76%, balanced_accuracy: 84.25%, F1-score:69.61%
+Class 3 against all:
+ sensitivity: 64.71%, specificity: 96.12%, precision: 73.33%, accuracy: 91.67%, balanced_accuracy: 80.41%, F1-score:68.75%
+Class 4 against all:
+ sensitivity: 77.47%, specificity: 98.26%, precision: 88.07%, accuracy: 95.31%, balanced_accuracy: 87.87%, F1-score:82.43%
+Class 5 against all:
+ sensitivity: 68.68%, specificity: 97.62%, precision: 83.86%, accuracy: 93.20%, balanced_accuracy: 83.15%, F1-score:75.51%
+Class 6 against all:
+ sensitivity: 65.64%, specificity: 98.47%, precision: 89.82%, accuracy: 92.85%, balanced_accuracy: 82.05%, F1-score:75.85%
+Class 7 against all:
+ sensitivity: 84.45%, specificity: 97.70%, precision: 83.86%, accuracy: 96.05%, balanced_accuracy: 91.07%, F1-score:84.15%
+Total evaluation: 
+accuracy: 75.44%, balanced accuracy: 75.44%

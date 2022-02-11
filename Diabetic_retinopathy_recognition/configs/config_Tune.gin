@@ -1,0 +1,28 @@
+
+Graham = False
+num_classes = 5  # 1 for regression; 2 for binary classification ; 5 for multi(5-)class classification
+
+batch_size = 30
+Trainer.N_epochs = 1000
+Trainer.num_classes=%num_classes
+
+ckpt_fn="''"
+
+choose_model.ckpt_fn= %ckpt_fn
+choose_model.num_classes=%num_classes
+choose_model.batch_size = %batch_size
+
+load_file_names.num_sample = 1000
+load_file_names.num_classes=%num_classes
+load_file_names.Graham = %Graham
+
+build_dataset.batch_size = %batch_size
+build_dataset_k.batch_size = %batch_size
+build_dataset.Graham = %Graham
+
+
+
+
+
+
+
