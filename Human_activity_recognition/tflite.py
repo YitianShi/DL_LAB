@@ -25,7 +25,7 @@ def tflite_generator(model_type):
     interpreter = tf.lite.Interpreter(model_content=tflite_model)
     interpreter.allocate_tensors()
 
-    open("AndroidStudioProjects/MyApplication/app/src/main/ml/tflite_model.tflite", "wb").write(tflite_model)
+    open("Android_App_Human_activity_recognition/MyApplication/app/src/main/ml/tflite_model.tflite", "wb").write(tflite_model)
 
 
 tflite_generator('2')
